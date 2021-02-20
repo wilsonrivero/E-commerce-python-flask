@@ -8,9 +8,20 @@ def home():
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
-   if request.method == "POST":
-      name = request.form['name']
-      price = request.form['price']
-      print(f'\033[1;32m name: {name} price: {price} \033[1;32m')
+   try:
+      if request.method == "POST":
+         name = request.form['name']
+         price = request.form['price']
+         retail = False
+
+         if request.form['retail'] == 'on':
+            retail = True
+         else:
+            retail = False
+
+         print(f'\033[1;32m retail: {retail} \033[1;32m')
+   except:
+      return render_template('register.html')
+
 
    return render_template('register.html')
