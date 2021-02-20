@@ -13,7 +13,7 @@ def home():
       return redirect(url_for('home'))
 
 
-
+#UPDATE
 @app.route('/edit/<int:_id>', methods=["POST", "GET"])
 def edit(_id):
    try:
@@ -23,20 +23,23 @@ def edit(_id):
          name = request.form['name']
          price = request.form['price']
 
-         varejo = request.form.get('ok')
-         if varejo == 'ok':
-            varejo = True
-         else:
-            varejo = False
+         
 
          if name == '' or name == None:
             flash('Por favor preencha o campo nome !')
          elif price == '' or price == None:
             flash('Erro por favor verifique o campo de preço')
          else:
+            varejo = request.form.get('retail')
+            if varejo == 'ok':
+               varejo = True
+            else:
+               varejo = False
             price = float(price)
+
             product.name = name 
             product.price = price
+
             product.retail = varejo
 
             flash('Editado com sucesso')
@@ -50,25 +53,24 @@ def edit(_id):
       print('erro')
 
 
-
+#ADD
 @app.route('/register', methods=['POST', 'GET'])
 def register():
    if request.method == "POST":
       name = request.form['name']
       price = request.form['price']
-     
-      varejo = request.form.get('ok')
-
-      if varejo == 'ok':
-         varejo = True
-      else:
-         varejo = False
+      varejo = request.form.get('retail')
 
       if name == '' or name == None:
          flash('Por favor preencha o campo nome !')
       elif price == '' or price == None:
          flash('Erro por favor verifique o campo de preço')
       else:
+         
+         if varejo == 'ok':
+            varejo = True
+         else:
+            varejo = False
          
          flash('Cadastrado com sucesso')
          price = float(price)
