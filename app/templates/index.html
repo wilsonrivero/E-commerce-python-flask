@@ -28,12 +28,47 @@
         </div>
       </div>
     </nav>
-
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="alert alert-success">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
     <div style="margin: 0px auto; width: 900px; text-align: center;">
       {% block content %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Preço</th>
+            <th scope="col">Varejo</th>
+            <th scope="col">Opções</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in products%}
+            <tr>
+              <td>{{p.name}}</td>
+              <td>{{p.price}}</td>
+              {% if p.retail %}
+                <td>Varejo</td>
+              {% else %}
+                <td>Atacdo</td>
+              {% endif %}
+              <td>
+                <a href="/edit/_id"><button class="btn btn-primary">Editar</button></a>
+                <a href="/delete/_id"><button class="btn btn-danger">Excluit</button></a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
       {% endblock %}
-  
     </div>
+
    
 
 
