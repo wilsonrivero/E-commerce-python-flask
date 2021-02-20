@@ -7,7 +7,13 @@ from app.models.tables import Products
 def home():
    try:
       product = Products.query.all()
-      return render_template('index.html', products=product)
+      total = 0
+      for p in product:
+         total += p.price
+      
+      total = f'{total:.2f}'
+
+      return render_template('index.html', products=product, total_of_money=total)
    except:
       flash("houver um erro!")
       return redirect(url_for('home'))
@@ -83,7 +89,7 @@ def register():
    return render_template('register.html')
 
 
-
+#DELETE
 @app.route('/delete/<int:_id>')
 def delete(_id):
    try:
@@ -95,3 +101,25 @@ def delete(_id):
    except:
       flash('Houde um erro em deletar, tente novamente')
       return redirect(url_for('home'))
+
+
+
+@app.route('/search', methods=["GET", "POST"])
+def search():
+
+   if request.method == "POST":
+      name = request.form['name']
+      product = Products.query.filter_by(name=name).all()
+      
+      print(len(product))
+
+      list_of_products_search = []
+
+      for x in range(len(product)):
+         list_of_products_search.append(product[x].name, product[x].price)
+
+      return render_template('search.html', products=list_of_products_search)
+
+
+
+   return render_template('search.html')

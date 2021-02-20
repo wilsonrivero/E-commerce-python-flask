@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+
+{% block title %} Procurar {% endblock %}
+
+
+{% block content %}
+
+   {% with messages = get_flashed_messages() %}
+      {% if messages %}
+         <ul class="alert alert-danger">
+            {% for message in messages %}
+               <li>{{ message }}</li>
+            {% endfor %}
+         </ul>
+      {% endif %}
+   {% endwith %}
+
+   <h1>Procura produto</h1>
+   <form action="/search" method="POST">
+      <div class="mb-3">
+         <label for="name" class="form-label">Nome do Produto:</label>
+         <input type="text" class="form-control" id="name" name="name"  placeholder="Digite o nome ...">
+      </div>
+      <button type="submit" class="btn btn-primary">Procurar</button>
+   </form>
+
+
+   <div class="">
+      {{products}}
+
+   </div>
+
+{% endblock %}

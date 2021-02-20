@@ -31,7 +31,7 @@
               <a class="nav-link active" aria-current="page" href="/register">Adicionar Produtos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Lista de Produtos</a>
+              <a class="nav-link" href="/search">Busca de Produtos</a>
             </li>
           </ul>
         </div>
@@ -61,7 +61,7 @@
           {% for p in products%}
             <tr>
               <td>{{p.name}}</td>
-              <td>{{p.price}}</td>
+              <td>R$ {{p.price}}</td>
               {% if p.retail %}
                 <td style="color: rgb(47, 61, 255);">Varejo</td>
               {% else %}
@@ -73,6 +73,10 @@
               </td>
             </tr>
           {% endfor %}
+          <tr>
+            <td colspan="2">Total:</td>
+            <td>R$ {{total_of_money}}</td>
+          </tr>
         </tbody>
       </table>
       {% endblock %}
