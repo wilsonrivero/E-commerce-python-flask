@@ -5,9 +5,12 @@ from app.models.tables import Products
 
 @app.route('/')
 def home():
-   product = Products.query.all()
-   return render_template('index.html', products=product)
-
+   try:
+      product = Products.query.all()
+      return render_template('index.html', products=product)
+   except:
+      flash("houver um erro!")
+      return redirect(url_for('home'))
 
 
 
@@ -43,3 +46,14 @@ def register():
 
 
 
+@app.route('/delete/<int:_id>')
+def delete(_id):
+   try:
+      product = Products.query.get(_id)
+      db.session.delete(product)
+      db.session.commit()
+      flash('Deletado com successo')
+      return redirect(url_for('home'))
+   except:
+      flash('Houde um erro em deletar, tente novamente')
+      return redirect(url_for('home'))

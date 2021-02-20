@@ -63,13 +63,13 @@
               <td>{{p.name}}</td>
               <td>{{p.price}}</td>
               {% if p.retail %}
-                <td>Varejo</td>
+                <td style="color: rgb(47, 61, 255);">Varejo</td>
               {% else %}
-                <td>Atacado</td>
+                <td style="color: red;">Atacado</td>
               {% endif %}
               <td>
-                <a href="/edit/_id"><button class="btn btn-primary">Editar</button></a>
-                <a href="/delete/_id"><button class="btn btn-danger">Excluit</button></a>
+                <a href="/edit/{{p._id}}"><button class="btn btn-primary">Editar</button></a>
+                <a href="/delete/{{p._id}}"><button class="btn btn-danger">Excluit</button></a>
               </td>
             </tr>
           {% endfor %}
@@ -79,11 +79,6 @@
     </div>
 
    
-
-
-
-
-
 
 
 
