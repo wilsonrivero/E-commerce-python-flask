@@ -14,6 +14,42 @@ def home():
 
 
 
+@app.route('/edit/<int:_id>', methods=["POST", "GET"])
+def edit(_id):
+   try:
+      product = Products.query.get(_id)
+
+      if request.method == "POST":
+         name = request.form['name']
+         price = request.form['price']
+
+         varejo = request.form.get('ok')
+         if varejo == 'ok':
+            varejo = True
+         else:
+            varejo = False
+
+         if name == '' or name == None:
+            flash('Por favor preencha o campo nome !')
+         elif price == '' or price == None:
+            flash('Erro por favor verifique o campo de preço')
+         else:
+            price = float(price)
+            product.name = name 
+            product.price = price
+            product.retail = varejo
+
+            flash('Editado com sucesso')
+            db.session.commit()
+            return redirect(url_for('home'))
+
+
+      return render_template('update.html', p=product)
+
+   except:
+      print('erro')
+
+
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
