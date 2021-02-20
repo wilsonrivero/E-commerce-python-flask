@@ -10,7 +10,17 @@ def home():
 @app.route('/register', methods=['POST', 'GET'])
 def register():
    if request.method == "POST":
-      product = Products(request.form['name'], request.form['price'], retail=True)
+      name = request.form['name']
+      price = request.form['price']
+      price = float(price)
+      varejo = request.form.get('ok')
+
+      if varejo == 'ok':
+         varejo = True
+      else:
+         varejo = False
+
+      product = Products(name, price , varejo)
       db.session.add(product)
       db.session.commit()
       return render_template('index.html')
