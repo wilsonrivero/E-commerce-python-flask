@@ -111,14 +111,16 @@ def search():
       name = request.form['name']
       product = Products.query.filter_by(name=name).all()
       
-      print(len(product))
+      list_of_products = [product]
+      print(len(list_of_products))
 
-      list_of_products_search = []
 
-      for x in range(len(product)):
-         list_of_products_search.append(product[x].name, product[x].price)
+      for  value in list_of_products:
+         length = len(value)
+         for x in range(length):
+            pass
 
-      return render_template('search.html', products=list_of_products_search)
+      return render_template('search.html', products=list_of_products, size=length)
 
 
 

@@ -16,7 +16,7 @@
    {% endwith %}
 
    <h1>Procura produto</h1>
-   <form action="/search" method="POST">
+   <form action="/search" method="POST" class="mt-3">
       <div class="mb-3">
          <label for="name" class="form-label">Nome do Produto:</label>
          <input type="text" class="form-control" id="name" name="name"  placeholder="Digite o nome ...">
@@ -26,8 +26,37 @@
 
 
    <div class="">
-      {{products}}
-
+      <table class="table">
+         <thead>
+           <tr>
+               <th scope="col">Nome:</th>
+               <th scope="col">Preço</th>
+               <th scope="col">Tipo</th>
+               <th scope="col">Opções</th>
+           </tr>
+         </thead>
+         <tbody>
+            {% for value in products %}
+               
+                  {% for x in range(size) %}
+                     <tr>
+                        <td>{{value[x].name}}</td>
+                        <td>{{value[x].price}}</td>
+                        {% if value[x].retail %}
+                           <td style="color: rgb(47, 61, 255);">Varejo</td>
+                        {% else %}
+                           <td style="color: red;">Atacado</td>
+                        {% endif %}
+                        <td>
+                           <a href="/edit/{{value[x]._id}}"><button class="btn btn-primary">Editar</button></a>
+                           <a href="/delete/{{value[x]._id}}"><button class="btn btn-danger">Excluir</button></a>
+                        </td>
+                     </tr>
+                  {% endfor %}
+               
+            {% endfor %}
+         </tbody>
+       </table>
    </div>
 
 {% endblock %}
