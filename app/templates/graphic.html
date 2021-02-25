@@ -4,10 +4,12 @@
 
 
 {% block content %}
-<h1>Hello</h1>
+<h1>Gráfico de Vendas</h1>
 
-<canvas id="BarChart" width="700" height="800"></canvas>
-
+<canvas id="BarChart" width="700" height="500"></canvas>
+<!--
+   HERE IS TO CREATE A GRAPHIC
+-->
 <script>
    var ctx = document.getElementById('BarChart').getContext("2d")
    
@@ -19,7 +21,9 @@
             {
                label: "Gráfico de Vendas",
                data: {{values | safe}},
-               BorderColor: "rgb(0,0,0)"
+               BorderColor: "rgb(0,0,0)",
+               backgroundColor: "rgb(0,0,0)",
+               borderWidth: 0
             }
          ]
       },

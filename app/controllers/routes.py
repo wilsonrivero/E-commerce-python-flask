@@ -151,6 +151,9 @@ def graphic():
    count_m = 0
    count_cha = 0
    count_cre = 0
+   count_seb = 0
+   count_pros = 0
+   count_mil = 0
    for name in list_of_names:
       if name == 'Milagrosa':
          count_m += 1
@@ -158,11 +161,20 @@ def graphic():
          count_cha += 1
       elif name == 'Creme':
          count_cre += 1
-
+      elif name == 'Sebo de Carneiro':
+         count_seb += 1
+      elif name == 'Prostata':
+         count_pros += 1
+   
+      elif name == 'milagrosa mil ervas':
+         count_mil += 1
    
    list_of_how_many_times.append(count_cha)
    list_of_how_many_times.append(count_cre)
    list_of_how_many_times.append(count_m)
+   list_of_how_many_times.append(count_pros)
+   list_of_how_many_times.append(count_seb)
+   list_of_how_many_times.append(count_mil)
 
    return render_template('graphic.html', values=list_of_how_many_times, labels=list_of_names_sorted)
 
