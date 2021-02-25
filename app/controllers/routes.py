@@ -1,6 +1,9 @@
 from flask import render_template, request, flash, redirect, url_for
 from app import app, db
 from app.models.tables import Products
+import matplotlib.pyplot as plt 
+import os
+
 
 
 @app.route('/')
@@ -10,7 +13,9 @@ def home():
       total = 0
       for p in product:
          total += p.price
-      
+            
+
+
       total = f'{total:.2f}'
 
       return render_template('index.html', products=product, total_of_money=total)
@@ -123,5 +128,47 @@ def search():
       return render_template('search.html', products=list_of_products, size=length)
 
 
-
    return render_template('search.html')
+
+
+
+@app.route('/graphic' ,methods=['GET'])
+def graphic():
+   
+   products = Products.query.all()
+   list_of_names_sorted = []
+   list_of_names = []
+   for value in products:
+
+      list_of_names_sorted.append(value.name)
+      list_of_names_sorted.sort()
+      list_of_names_sorted = list(dict.fromkeys(list_of_names_sorted))
+
+      list_of_names.append(value.name)
+      list_of_names.sort()
+
+   list_of_how_many_times = []
+   count_m = 0
+   count_cha = 0
+   count_cre = 0
+   for name in list_of_names:
+      if name == 'Milagrosa':
+         count_m += 1
+      elif name == 'Chá':
+         count_cha += 1
+      elif name == 'Creme':
+         count_cre += 1
+
+   
+   list_of_how_many_times.append(count_cha)
+   list_of_how_many_times.append(count_cre)
+   list_of_how_many_times.append(count_m)
+
+   return render_template('graphic.html', values=list_of_how_many_times, labels=list_of_names_sorted)
+
+
+
+
+   
+
+

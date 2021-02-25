@@ -1,0 +1,34 @@
+{% extends "index.html" %}
+
+{% block title %} Gráfico {% endblock %}
+
+
+{% block content %}
+<h1>Hello</h1>
+
+<canvas id="BarChart" width="700" height="800"></canvas>
+
+<script>
+   var ctx = document.getElementById('BarChart').getContext("2d")
+   
+   var barChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+         labels: {{labels | safe}},
+         datasets: [
+            {
+               label: "Gráfico de Vendas",
+               data: {{values | safe}},
+               BorderColor: "rgb(0,0,0)"
+            }
+         ]
+      },
+      options: {
+         responsive: false
+      }
+   })
+
+</script>
+
+
+{% endblock %}
